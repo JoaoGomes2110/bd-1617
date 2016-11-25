@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `reserva_bilhetes`.`Reserva` (
   `id_Reserva` VARCHAR(9) NOT NULL,
   `id_Viagem` VARCHAR(9) NOT NULL,
   `Username` VARCHAR(12) NOT NULL,
-  `Data` DATETIME NOT NULL,
+  `Data_Reserva` DATETIME NOT NULL,
   `Preço` DECIMAL(5,2) UNSIGNED NOT NULL,
   PRIMARY KEY (`id_Reserva`),
   INDEX `Viagem_idx` (`id_Viagem` ASC),
