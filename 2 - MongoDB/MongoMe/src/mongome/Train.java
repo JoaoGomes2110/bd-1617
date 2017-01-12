@@ -24,6 +24,23 @@ public class Train {
         this.lugares = lugares;
     }
 
+    public String getId_Comboio() {
+        return id_Comboio;
+    }
+
+    public int getLotacao() {
+        return Lotacao;
+    }
+
+    public String getNome() {
+        return Nome;
+    }
+
+    public ArrayList<Seat> getLugares() {
+        return lugares;
+    }
+    
+
     @Override
     public String toString() {
         return "Train{" + "id_Comboio=" + id_Comboio + ", Lotacao=" + Lotacao + ", Nome=" + Nome + ", lugares=" + lugares + '}';
