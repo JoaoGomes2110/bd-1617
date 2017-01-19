@@ -40,7 +40,6 @@ public class MongoWriter {
                doc.put("_id", usr.getUsername());
                doc.put("nome",usr.getNome());
                doc.put("password",usr.getPassword());
-               doc.put("nome",usr.getNome());
                doc.put("email",usr.getEmail());
                doc.put("nif",usr.getNIF());
                doc.put("morada",usr.getMorada());
@@ -72,6 +71,16 @@ public class MongoWriter {
                doc.put("destino",r.getDestino());
                doc.put("horaPartida",r.getHoraPartida());
                doc.put("horaChegada",r.getHoraChegada());
+               List<BasicDBObject> lugares = new ArrayList<>();
+               
+               for(Seat s : r.getLugares()){
+                   BasicDBObject tmp = new BasicDBObject();
+                   tmp.put("numero",s.getNumero());
+                   tmp.put("carruagem",s.getCarruagem());
+                   tmp.put("classe", s.getClasse());
+                   lugares.add(tmp);
+               }
+               doc.put("lugares", lugares);
                
                if (doc!=null)
                     col.insertOne(doc);

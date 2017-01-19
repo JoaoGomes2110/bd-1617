@@ -5,6 +5,8 @@
  */
 package mongome;
 
+import java.util.List;
+
 /**
  *
  * @author João
@@ -19,8 +21,9 @@ public class Reserva {
     private final String destino;
     private final String horaPartida;
     private final String horaChegada;
+    private final List<Seat> lugares;
 
-    public Reserva(String id, String username, String dataRes, String idComboio, double preco, String origem, String destino, String horaPartida, String horaChegada) {
+    public Reserva(String id, String username, String dataRes, String idComboio, double preco, String origem, String destino, String horaPartida, String horaChegada, List<Seat> lugares) {
         this.id = id;
         this.username = username;
         this.dataRes = dataRes;
@@ -30,6 +33,7 @@ public class Reserva {
         this.destino = destino;
         this.horaPartida = horaPartida;
         this.horaChegada = horaChegada;
+        this.lugares = lugares;
     }
 
     public String getId() {
@@ -68,6 +72,9 @@ public class Reserva {
         return horaChegada;
     }
     
+    public List<Seat> getLugares(){
+        return lugares;
+    }
     
     
     

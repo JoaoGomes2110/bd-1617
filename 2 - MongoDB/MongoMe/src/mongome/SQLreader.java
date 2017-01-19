@@ -104,8 +104,6 @@ public class SQLreader {
         st = con.createStatement();
         rs = st.executeQuery("SELECT * FROM cliente");
 
-
-
         while (rs.next()){
             int i = 1;
             while(i <= 6)
@@ -125,14 +123,39 @@ public class SQLreader {
     public ArrayList getReserva() throws ClassNotFoundException, SQLException{
         Statement st = null;
         ResultSet rs = null;
+        ResultSet rs_lugares = null;
         ArrayList<Reserva> reservaList = new ArrayList <>();
         
         connect();
         st = con.createStatement();
+        
+        HashMap<String,ArrayList<Seat>> seatList = new HashMap<>();
+        rs_lugares = st.executeQuery("SELECT * FROM lugar_reserva");
+        
+        while (rs_lugares.next()){
+            int i = 1;
+            while(i <= 3)
+                if(seatList.get(rs_lugares.getString(5)) != null) {
+                     seatList.get(rs_lugares.getString(5)).add(
+                                  new Seat(rs_lugares.getInt(i++),
+                                           rs_lugares.getInt(i++),
+                                           rs_lugares.getInt(i++)
+                     ));
+                }else{
+                    ArrayList<Seat> aux = new ArrayList<>();
+                    aux.add(new Seat(rs_lugares.getInt(i++),
+                                     rs_lugares.getInt(i++),
+                                     rs_lugares.getInt(i++)));
+
+                    seatList.put(rs_lugares.getString(5),aux);
+                }
+        }
+        
         rs = st.executeQuery("SELECT id_Reserva,R.Username, Data_Reserva, V.id_Comboio, Preço, Origem, Destino, Hora_Partida, Hora_Chegada\n" +
                                  "FROM reserva AS R INNER JOIN viagem AS V\n" +
                                      "ON V.id_Viagem = R.id_Viagem");
-
+        
+        
 
 
         while (rs.next()){
@@ -146,7 +169,8 @@ public class SQLreader {
                                             rs.getString(i++),
                                             rs.getString(i++),
                                             rs.getString(i++),
-                                            rs.getString(i++)
+                                            rs.getString(i++),
+                                            seatList.get(rs.getString(1))
                 ));
         }
 
